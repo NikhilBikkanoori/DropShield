@@ -119,8 +119,8 @@ const Dashboard = () => {
   const [todayFocus, setTodayFocus] = useState(() => localStorage.getItem('todayFocus') || '');
   const [studyStreak, setStudyStreak] = useState(() => parseInt(localStorage.getItem('studyStreak') || '0'));
   const [studyLog, setStudyLog] = useState(() => JSON.parse(localStorage.getItem('studyLog') || '[]'));
-  const [selectedMood, setSelectedMood] = useState(null);
-  const [helpRequest, setHelpRequest] = useState('');
+  const [, setSelectedMood] = useState(null);
+  const [, setHelpRequest] = useState('');
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [pauseMode, setPauseMode] = useState(() => localStorage.getItem('pauseMode') === 'true');
   const [badges, setBadges] = useState(() => JSON.parse(localStorage.getItem('badges') || '["First Login"]'));
@@ -203,6 +203,7 @@ const Dashboard = () => {
   };
 
   // Send help request
+  // eslint-disable-next-line no-unused-vars
   const sendHelpRequest = (type) => {
     alert(`Help request sent to ${type}! They will reach out soon.`);
     setShowHelpModal(false);
@@ -210,6 +211,7 @@ const Dashboard = () => {
   };
 
   const badgeColor = badgeColors[data.risk.level] || badgeColors.Medium;
+  // eslint-disable-next-line no-unused-vars
   const trendScaled = useMemo(() => data.risk.trend.map((v) => Math.max(20, Math.min(130, v))), [data.risk.trend]);
 
   // Calculate weekly study time

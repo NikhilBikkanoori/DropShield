@@ -6,7 +6,6 @@ import ParentLogin from '../pages/ParentLogin';
 import Dashboard from '../pages/Dashboard';
 import MentorDashboard from '../pages/MentorDashboard';
 import ParentDashboard from '../pages/ParentDashboard';
-import Admin from '../pages/Admin';
 import Counseling from '../pages/Counseling';
 import StudentProfile from '../pages/studentProfile';
 import MentorProfile from '../pages/MentorProfile';

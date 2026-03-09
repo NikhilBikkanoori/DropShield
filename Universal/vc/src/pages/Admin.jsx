@@ -199,6 +199,7 @@ export default function AdminPanel() {
   }
 
   // Export/Import
+  // eslint-disable-next-line no-unused-vars
   function exportData() {
     const all = {
       users,
@@ -220,6 +221,7 @@ export default function AdminPanel() {
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
 
+  // eslint-disable-next-line no-unused-vars
   function importData(e) {
     const f = e.target.files[0];
     if (!f) return;

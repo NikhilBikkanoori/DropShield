@@ -30,6 +30,7 @@ export default function AdminAttendance({
     attFormRef.current.reset();
   }
 
+  // eslint-disable-next-line no-unused-vars
   function del(idx) {
     setAttendance((s) => s.filter((_, i) => i !== idx));
   }

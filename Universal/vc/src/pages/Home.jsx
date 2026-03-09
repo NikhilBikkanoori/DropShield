@@ -318,7 +318,7 @@ const Home = () => {
       {/* FOOTER */}
       <footer id="contact">
         <p>&copy; 2025 Dropout Prediction &amp; Counselling System. All Rights Reserved.</p>
-        <p><a href="#contact">Contact Us</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p><a href="#contact">Contact Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
       </footer>
     </div>
   );

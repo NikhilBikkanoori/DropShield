@@ -160,6 +160,7 @@ const Counseling = () => {
     return result;
   };
 
+  // eslint-disable-next-line no-unused-vars
   const progressPercent = actions.length > 0 ? Math.round((actions.filter(a => a.status === 'done').length / actions.length) * 100) : 0;
 
   const roadmapLibrary = {

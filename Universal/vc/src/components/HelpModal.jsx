@@ -85,34 +85,34 @@ const HelpModal = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="help-section">
-                    <a href="#" className="help-item">
+                    <button type="button" className="help-item" style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}>
                         <span className="help-icon">📞</span>
                         <div>
                             <div style={{ fontWeight: 600 }}>Emergency Helpline</div>
                             <small style={{ color: '#bcc2de' }}>24/7 support for urgent needs</small>
                         </div>
-                    </a>
-                    <a href="#" className="help-item">
+                    </button>
+                    <button type="button" className="help-item" style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}>
                         <span className="help-icon">💬</span>
                         <div>
                             <div style={{ fontWeight: 600 }}>Counselor Chat</div>
                             <small style={{ color: '#bcc2de' }}>Talk to an academic advisor</small>
                         </div>
-                    </a>
-                    <a href="#" className="help-item">
+                    </button>
+                    <button type="button" className="help-item" style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}>
                         <span className="help-icon">📚</span>
                         <div>
                             <div style={{ fontWeight: 600 }}>Student Handbook</div>
                             <small style={{ color: '#bcc2de' }}>Policies and procedures</small>
                         </div>
-                    </a>
-                    <a href="#" className="help-item">
+                    </button>
+                    <button type="button" className="help-item" style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}>
                         <span className="help-icon">📧</span>
                         <div>
                             <div style={{ fontWeight: 600 }}>Email Support</div>
                             <small style={{ color: '#bcc2de' }}>Response within 24 hours</small>
                         </div>
-                    </a>
+                    </button>
                 </div>
 
                 <button

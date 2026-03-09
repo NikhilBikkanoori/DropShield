@@ -9,6 +9,7 @@ export default function StudentProfile() {
 
   useEffect(() => {
     fetchLoggedInStudent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const fetchLoggedInStudent = async () => {
     try {

@@ -1,7 +1,10 @@
 [build]
   base = "Universal/vc"
   publish = "build"
-  command = "npm install && npm run build"
+  command = "CI=false npm install && npm run build"
+
+[build.environment]
+  CI = "false"
 
 [[redirects]]
   from = "/*"

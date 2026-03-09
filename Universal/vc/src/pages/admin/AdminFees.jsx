@@ -25,6 +25,7 @@ export default function AdminFees({ fees, setFees, escapeHtml }) {
     feeFormRef.current.reset();
   }
 
+  // eslint-disable-next-line no-unused-vars
   function del(idx) {
     setFees((s) => s.filter((_, i) => i !== idx));
   }
