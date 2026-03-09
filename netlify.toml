@@ -1,7 +1,7 @@
 [build]
-  base = "Universal/vc"
-  publish = "build"
-  command = "CI=false npm install && npm run build"
+  base = "SIH{Changes}"
+  publish = "dist"
+  command = "npm install && npm run build"
 
 [build.environment]
   CI = "false"
