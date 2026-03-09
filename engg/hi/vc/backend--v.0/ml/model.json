@@ -1,0 +1,31 @@
+{
+  "trees": [
+    {
+      "feature": 0,
+      "threshold": 75,
+      "left": {
+        "feature": 2,
+        "threshold": 50,
+        "left": { "label": "high" },
+        "right": { "label": "medium" }
+      },
+      "right": {
+        "feature": 1,
+        "threshold": 3000,
+        "left": { "label": "medium" },
+        "right": { "label": "low" }
+      }
+    },
+    {
+      "feature": 2,
+      "threshold": 55,
+      "left": { "label": "high" },
+      "right": {
+        "feature": 0,
+        "threshold": 85,
+        "left": { "label": "medium" },
+        "right": { "label": "low" }
+      }
+    }
+  ]
+}

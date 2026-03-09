@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DropShield · AI Dropout Guidance System</title>
+  <meta name="description" content="AI-powered student dropout prediction and counselling system for all types of educational institutions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #070d1a;
+      --surface: rgba(255,255,255,0.05);
+      --border:  rgba(255,255,255,0.10);
+      --text:    #e2e8f0;
+      --muted:   #94a3b8;
+      --accent:  #38bdf8;
+      --glow:    rgba(56,189,248,0.25);
+    }
+
+    body {
+      font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 24px 60px;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated Background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 10%, rgba(56,189,248,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(99,102,241,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      backdrop-filter: blur(8px);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      max-width: 680px;
+      margin: 60px auto 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.3);
+      background: rgba(56,189,248,0.08);
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #38bdf8 30%, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    /* ── Section Label ── */
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin: 48px 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Cards Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 18px;
+    }
+
+    .card.engg::before  { background: radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 70%); }
+    .card.arts::before  { background: radial-gradient(circle at top left, rgba(244,114,182,0.12), transparent 70%); }
+    .card.school::before{ background: radial-gradient(circle at top left, rgba(52,211,153,0.12), transparent 70%); }
+    .card.other::before { background: radial-gradient(circle at top left, rgba(251,191,36,0.12),  transparent 70%); }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card.engg:hover   { box-shadow: 0 20px 50px rgba(56,189,248,0.15); }
+    .card.arts:hover   { box-shadow: 0 20px 50px rgba(244,114,182,0.15); }
+    .card.school:hover { box-shadow: 0 20px 50px rgba(52,211,153,0.15); }
+    .card.other:hover  { box-shadow: 0 20px 50px rgba(251,191,36,0.15); }
+
+    .icon-ring {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .engg  .icon-ring { background: rgba(56,189,248,0.15);  color: #38bdf8; }
+    .arts  .icon-ring { background: rgba(244,114,182,0.15); color: #f472b6; }
+    .school .icon-ring{ background: rgba(52,211,153,0.15);  color: #34d399; }
+    .other  .icon-ring{ background: rgba(251,191,36,0.15);  color: #fbbf24; }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-arrow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-top: 4px;
+      transition: gap 0.2s;
+    }
+    .engg  .card-arrow { color: #38bdf8; }
+    .arts  .card-arrow { color: #f472b6; }
+    .school .card-arrow{ color: #34d399; }
+    .other  .card-arrow{ color: #fbbf24; }
+
+    .card:hover .card-arrow { gap: 10px; }
+
+    /* ── Stats bar ── */
+    .stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 64px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="logo">DropShield</div>
+    <span class="badge">AI-Powered · SIH 2025</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">
+      <i class="fas fa-shield-halved"></i>
+      Student Dropout Prevention
+    </div>
+    <h1>Predict risk.<br><span>Protect every learner.</span></h1>
+    <p>
+      A unified AI platform that monitors attendance, marks, and fees —
+      sends real-time alerts to mentors and parents — and helps institutions
+      intervene before students slip away.
+    </p>
+  </div>
+
+  <p class="section-label">Select your institution type to continue</p>
+
+  <!-- Org Cards -->
+  <div class="grid">
+
+    <a href="org-engineering.html" class="card engg">
+      <div class="icon-ring"><i class="fas fa-microchip"></i></div>
+      <div>
+        <div class="card-title">Engineering</div>
+        <div class="card-desc">Technical curricula dropout tracking with AI risk assessment, mentor dashboards, and parent alerts.</div>
+      </div>
+      <div class="card-arrow">Enter Portal <i class="fas fa-arrow-right"></i></div>
+    </a>
+
+    <a href="org-arts.html" class="card arts">
+      <div class="icon-ring"><i class="fas fa-palette"></i></div>
+      <div>
+        <div class="card-title">Arts & Humanities</div>
+        <div class="card-desc">Tailored risk signals and counseling workflows for arts, design, and humanities programmes.</div>
+      </div>
+      <div class="card-arrow">Enter Portal <i class="fas fa-arrow-right"></i></div>
+    </a>
+
+    <a href="org-school.html" class="card school">
+      <div class="icon-ring"><i class="fas fa-school"></i></div>
+      <div>
+        <div class="card-title">School</div>
+        <div class="card-desc">K-12 student cohort health monitoring, early warning indicators, and parent communication tools.</div>
+      </div>
+      <div class="card-arrow">Enter Portal <i class="fas fa-arrow-right"></i></div>
+    </a>
+
+    <a href="org-other.html" class="card other">
+      <div class="icon-ring"><i class="fas fa-building-columns"></i></div>
+      <div>
+        <div class="card-title">Universal / Other</div>
+        <div class="card-desc">Flexible dropout prediction for skills academies, vocational institutes, and alternate education providers.</div>
+      </div>
+      <div class="card-arrow">Enter Portal <i class="fas fa-arrow-right"></i></div>
+    </a>
+
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-val">95%</div>
+      <div class="stat-label">Prediction Accuracy</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">10k+</div>
+      <div class="stat-label">Students Monitored</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">500+</div>
+      <div class="stat-label">Active Mentors</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">4</div>
+      <div class="stat-label">Institution Types</div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 DropShield · CodeVanguards · Smart India Hackathon 2025
+  </footer>
+
+</body>
+</html>
